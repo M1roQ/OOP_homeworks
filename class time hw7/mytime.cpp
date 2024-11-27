@@ -1,6 +1,6 @@
 #include "mytime.h"
 #include <stdexcept>
-#include <iostream>  
+#include <iostream>
 
 int Time::objectCount = 0;
 
@@ -127,28 +127,4 @@ int Time::GetObjectCount() {
 Time::~Time() {
     objectCount--;
     std::cout << "Destructor called. Current object count: " << objectCount << std::endl;
-}
-
-void SimpleWatch::ShowTime(const Time& t) const {
-    std::cout << "Time: " << t.GetHours() << ":" << t.GetMinutes() << ":" << t.GetSeconds() << std::endl;
-}
-
-void SimpleWatch::SetTime(Time& t, int h, int m, int s) const {
-    t = Time(h, m, s);  // Direct access to private members through friend class
-    t.Normalize();
-}
-
-void Watch::ShowTime(const Time& t) const {
-    int displayHours = t.GetHours();
-    if (!is24HourFormat && displayHours > 12) {
-        displayHours -= 12;
-    }
-    
-    std::cout << "Time: " << displayHours << ":" << t.GetMinutes() << ":" << t.GetSeconds() << 
-                 (is24HourFormat ? " (24-hour format)" : " (12-hour format)") << std::endl;
-}
-
-void Watch::SetTime(Time& t, int h, int m, int s) const {
-    t = Time(h, m, s);
-    t.Normalize();
 }

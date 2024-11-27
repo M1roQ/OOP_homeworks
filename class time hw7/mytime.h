@@ -1,11 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include <stdexcept>  // Для std::invalid_argument
-#include <memory>      // Для умных указателей
-
-class SimpleWatch;  // Forward declaration
-class Watch;        // Forward declaration
+#include <stdexcept> 
+#include <memory> 
 
 class Time {
     int hours;
@@ -17,9 +14,9 @@ class Time {
     void Normalize();
 
 public:
-    Time();  // Конструктор по умолчанию
-    Time(int h, int m, int s);  // Параметризированный конструктор
-    Time(const Time& t);  // Конструктор копирования
+    Time(); 
+    Time(int h, int m, int s);  
+    Time(const Time& t); 
 
     int GetHours() const noexcept;
     int GetMinutes() const noexcept;
@@ -43,25 +40,105 @@ public:
 
     static int GetObjectCount();
 
-    ~Time();  // Деструктор
+    ~Time(); 
+};
 
-    friend class SimpleWatch;  // SimpleWatch имеет доступ к приватным членам класса Time
-    friend class Watch;        // Watch имеет доступ к приватным членам класса Time
+class Clock {
+protected:
+    Time time;
+    bool is24HourFormat;
+
+public:
+    Clock() : is24HourFormat(true) {
+        std::cout << "Clock constructor called" << std::endl;
+    }
+
+    virtual void ShowTime() const = 0;
+    virtual ~Clock() {
+        std::cout << "Clock destructor called" << std::endl;
+    }
+
+    void SetTime(const Time& t) {
+        time = t;
+    }
+
+    void Set24HourFormat(bool is24Hour) {
+        is24HourFormat = is24Hour;
+    }
 };
 
 class SimpleWatch {
 public:
-    void ShowTime(const Time& t) const;
-    void SetTime(Time& t, int h, int m, int s) const;
+    void ShowTime(const Time& t) {
+        std::cout << "Time: " << t << std::endl;
+    }
+
+    void SetTime(Time& t, const Time& newTime) {
+        t = newTime;
+    }
 };
 
-class Watch {
-    bool is24HourFormat;  // True для 24-часового формата, False для 12-часового формата
-
+class WallClock : public Clock {
 public:
-    Watch() : is24HourFormat(true) {}
+    WallClock() {
+        std::cout << "WallClock constructor called" << std::endl;
+    }
 
-    void ShowTime(const Time& t) const;
-    void SetTime(Time& t, int h, int m, int s) const;
-    void ToggleFormat() { is24HourFormat = !is24HourFormat; }
+    void ShowTime() const override {
+        std::cout << "WallClock shows time: ";
+        time.PrintTime();
+    }
+
+    ~WallClock() {
+        std::cout << "WallClock destructor called" << std::endl;
+    }
+};
+
+class Watch : public Clock {
+public:
+    Watch() {
+        std::cout << "Watch constructor called" << std::endl;
+    }
+
+    void ShowTime() const override {
+        std::cout << "Watch shows time: ";
+        time.PrintTime();
+    }
+
+    ~Watch() {
+        std::cout << "Watch destructor called" << std::endl;
+    }
+};
+
+class SmartWatch : public Watch {
+public:
+    SmartWatch() {
+        std::cout << "SmartWatch constructor called" << std::endl;
+    }
+
+    void ShowTime() const override {
+        std::cout << "SmartWatch shows time: ";
+        time.PrintTime();
+    }
+
+    ~SmartWatch() {
+        std::cout << "SmartWatch destructor called" << std::endl;
+    }
+};
+
+class CuckooClock : public Clock {
+public:
+    CuckooClock() {
+        std::cout << "CuckooClock constructor called" << std::endl;
+    }
+
+    void ShowTime() const override {
+        std::cout << "CuckooClock shows time: ";
+        time.PrintTime();
+        std::cout << "Cuckoo! Cuckoo!" << std::endl;
+    }
+
+    ~CuckooClock() {
+        std::cout << "CuckooClock destructor called" << std::endl;
+    }
 };

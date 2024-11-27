@@ -1,27 +1,27 @@
 #include <iostream>
-#include <stdexcept>
 #include "mytime.h"
 
 int main() {
-    Time t(23, 59, 5); 
-    std::cout << "Initial time: " << std::endl;
-    t.PrintTime(); 
+    Time t(10, 15, 30);
 
-    SimpleWatch sw;
-    sw.ShowTime(t);
-    sw.SetTime(t, 10, 20, 30);
-    std::cout << "Time after SimpleWatch set: " << std::endl;
-    sw.ShowTime(t);
+    WallClock wallClock;
+    wallClock.SetTime(t);
+    wallClock.ShowTime();
 
-    Watch w;
-    w.ShowTime(t);
-    w.SetTime(t, 17, 45, 0);
-    std::cout << "Time after Watch set (24-hour format): " << std::endl;
-    w.ShowTime(t);
+    Watch watch;
+    watch.SetTime(t);
+    watch.ShowTime();
+
+    SmartWatch smartWatch;
+    smartWatch.SetTime(t);
+    smartWatch.ShowTime();
+
+    CuckooClock cuckooClock;
+    cuckooClock.SetTime(t);
+    cuckooClock.ShowTime();
+
+    SimpleWatch simpleWatch;
+    simpleWatch.ShowTime(t);
     
-    w.ToggleFormat();
-    std::cout << "Time after Watch set (12-hour format): " << std::endl;
-    w.ShowTime(t);
-
     return 0;
 }
