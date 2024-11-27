@@ -1,0 +1,4 @@
+/home/b_val4/Study/OOP/HW/class time hw7/build/CMakeFiles/TimeLib.dir
+/home/b_val4/Study/OOP/HW/class time hw7/build/CMakeFiles/TimeProject.dir
+/home/b_val4/Study/OOP/HW/class time hw7/build/CMakeFiles/edit_cache.dir
+/home/b_val4/Study/OOP/HW/class time hw7/build/CMakeFiles/rebuild_cache.dir
