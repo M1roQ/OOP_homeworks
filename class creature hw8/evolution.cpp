@@ -1,83 +1,73 @@
 #include <iostream>
+
 using namespace std;
 
-// Base class: generic creature
 class GenericCreature {
 public:
-    void exist() const {
-        cout << "I am a generic creature." << endl;
-    }
+    GenericCreature() {}
+    virtual ~GenericCreature() {}
+
+    void exist() { cout << "I am a generic creature.\n"; }
 };
 
-// Derived class: ocean creature (can swim)
+// Класс для существ, умеющих плавать
 class OceanCreature : public GenericCreature {
 public:
-    void swim() const {
-        cout << "I can swim." << endl;
-    }
+    void swim() { cout << "I can swim.\n"; }
 };
 
-// Derived class: terrestrial creature (can walk)
-class TerrestrialCreature : public GenericCreature {
-public:
-    void walk() const {
-        cout << "I can walk." << endl;
-    }
-};
-
-// Derived class: amphibious (can swim and walk)
+// Класс для существ, умеющих плавать и ходить
 class Amphibious : public OceanCreature {
 public:
-    void walk() const {
-        cout << "I can walk too." << endl;
-    }
+    void walk() { cout << "I can walk.\n"; }
+    using OceanCreature::swim;
 };
 
-// Derived class: bird (can walk and fly)
+// Класс для существ, которые не умеют плавать, но могут ходить
+class TerrestrialCreature : public Amphibious {
+public:
+    using Amphibious::walk;
+};
+
+// Класс для существ, которые могут ходить и летать
 class Bird : public TerrestrialCreature {
 public:
-    void fly() const {
-        cout << "I can fly." << endl;
-    }
+    void fly() { cout << "I can fly.\n"; }
 };
 
-// Derived class: waterfowl (can do everything: walk, fly, swim)
-class Waterfowl : public Bird, public OceanCreature {
-    // Using public inheritance to access all abilities
+// Класс для водоплавающих птиц, которые могут плавать, ходить и летать
+class Waterfowl : public Bird, public Amphibious {
 public:
-    void describeAbilities() const {
-        walk();
-        swim();
-        fly();
-    }
+    using Amphibious::walk;
+    using Amphibious::swim;
+    using Bird::fly;
 };
+
 
 int main() {
     cout << "OceanCreature abilities:" << endl;
     OceanCreature fish;
-    fish.exist();
     fish.swim();
 
     cout << "\nAmphibious abilities:" << endl;
     Amphibious frog;
-    frog.exist();
     frog.swim();
     frog.walk();
 
     cout << "\nTerrestrialCreature abilities:" << endl;
     TerrestrialCreature lion;
-    lion.exist();
     lion.walk();
 
     cout << "\nBird abilities:" << endl;
     Bird sparrow;
-    sparrow.exist();
     sparrow.walk();
     sparrow.fly();
 
     cout << "\nWaterfowl abilities:" << endl;
     Waterfowl duck;
-    duck.describeAbilities();
+    duck.walk();
+    duck.fly();
+    duck.swim();
 
     return 0;
 }
