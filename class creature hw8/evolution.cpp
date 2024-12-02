@@ -24,7 +24,7 @@ public:
 };
 
 // Класс для существ, которые не умеют плавать, но могут ходить
-class TerrestrialCreature : public Amphibious {
+class TerrestrialCreature : protected Amphibious {
 public:
     using Amphibious::walk;
 };
@@ -36,11 +36,9 @@ public:
 };
 
 // Класс для водоплавающих птиц, которые могут плавать, ходить и летать
-class Waterfowl : public Bird, public Amphibious {
+class Waterfowl : public Bird{
 public:
-    using Amphibious::walk;
-    using Amphibious::swim;
-    using Bird::fly;
+    using OceanCreature::swim;
 };
 
 
