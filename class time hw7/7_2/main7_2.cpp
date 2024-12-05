@@ -1,8 +1,7 @@
-#include <iostream>
-#include "mytime.h"
+#include "mytime7_2.h"
 
 int main() {
-    Time t(10, 15, 30);
+    Time t(23, 59, 59);
 
     WallClock wallClock;
     wallClock.SetTime(t);
@@ -10,6 +9,7 @@ int main() {
 
     Watch watch;
     watch.SetTime(t);
+    watch.Set24HourFormat(false);
     watch.ShowTime();
 
     SmartWatch smartWatch;
@@ -20,8 +20,5 @@ int main() {
     cuckooClock.SetTime(t);
     cuckooClock.ShowTime();
 
-    SimpleWatch simpleWatch;
-    simpleWatch.ShowTime(t);
-    
     return 0;
 }
