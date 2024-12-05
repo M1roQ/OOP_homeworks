@@ -21,4 +21,11 @@ cmake --build build
 ```
 cd build
 ```
-Далее выполнить запуск проекта командой `./TimeProject7_1` или `./TimeProject7_2`.
+Далее выполнить запуск проекта командой 
+```
+./TimeProject7_1
+```
+или 
+```
+./TimeProject7_2
+```
