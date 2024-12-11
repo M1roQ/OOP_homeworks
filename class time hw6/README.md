@@ -30,8 +30,13 @@ cmake --build build
 
 **Для запуска кода** необходимо выполнить 
 ```
+./build/TimeProject6_1
+```
+- будет запущен файл с кодом main6_1.cpp
+```
 ./build/TimeProject
-``` 
+```
+- будет запущен файл с кодом main.cpp
 **Для запуска юнит-тестов** выполните 
 ```
 ./build/test/TimeTests
