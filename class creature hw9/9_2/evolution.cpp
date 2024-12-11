@@ -5,33 +5,30 @@ using namespace std;
 class GenericCreature {
 public:
     void exist() const {
-        cout << "I am a generic creature." << endl;
+        cout << "I exist." << endl;
     }
 };
 
 // Derived class: ocean creature (can swim)
-class OceanCreature : public GenericCreature {
+class OceanCreature : virtual public GenericCreature {
 public:
     void swim() const {
         cout << "I can swim." << endl;
     }
+    
 };
 
 // Derived class: amphibious (can swim and walk)
 class Amphibious : public OceanCreature {
 public:
     void walk() const {
-        cout << "I can walk too." << endl;
+        cout << "I can walk." << endl;
     }
 };
 
-// Derived class: terrestrial creature (can walk)
+// Derived class: terrestrial creature (can walk but cannot swim)
 class TerrestrialCreature : public Amphibious {
 public:
-    void walk() const {
-        cout << "I can walk." << endl;
-    }
-    void swim() const = delete;
 };
 
 // Derived class: bird (can walk and fly)
@@ -42,8 +39,8 @@ public:
     }
 };
 
-// Derived class: waterfowl (can do everything: walk, fly, swim)
-class Waterfowl : public Bird, public OceanCreature {
+// Derived class: waterfowl (can walk, fly, and swim)
+class Waterfowl : public Bird, private OceanCreature {
 public:
 
 };
@@ -73,11 +70,10 @@ int main() {
 
     cout << "\nWaterfowl abilities:" << endl;
     Waterfowl duck;
-    duck.GenericCreature::exist();
+    duck.exist();
     duck.walk();
     duck.fly();
-    duck.OceanCreature::swim();
-
+    duck.swim();
 
     return 0;
 }
