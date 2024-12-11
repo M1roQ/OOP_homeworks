@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/TimeProject7_1.dir/main7_1.cpp.o -o TimeProject7_1  libTimeLib7_1.a 

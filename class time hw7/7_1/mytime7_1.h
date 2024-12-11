@@ -2,6 +2,24 @@
 
 #include <iostream>
 
+class Time;
+
+class Watch {
+    bool is24HourFormat;
+
+public:
+    Watch();
+    void Set24HourFormat(bool is24Hour);
+    void ShowTime(const Time& t) const;
+    void SetTime(Time& t, int h, int m, int s);
+
+    int GetHours(const Time& t) const noexcept;
+    int GetMinutes(const Time& t) const noexcept;
+    int GetSeconds(const Time& t) const noexcept;
+    
+    
+};
+
 class Time {
     int hours;
     int minutes;
@@ -40,8 +58,15 @@ public:
 
     ~Time();
 
+    friend void Watch::Set24HourFormat(bool is24Hour);
+    friend void Watch::ShowTime(const Time& t) const;
+    friend void Watch::SetTime(Time& t, int h, int m, int s);
+
+    friend int Watch::GetHours(const Time& t) const noexcept;
+    friend int Watch::GetMinutes(const Time& t) const noexcept;
+    friend int Watch::GetSeconds(const Time& t) const noexcept;
+
     friend class SimpleWatch;
-    friend class Watch;
 };
 
 class SimpleWatch {
@@ -50,12 +75,4 @@ public:
     void SetTime(Time& t, int h, int m, int s);
 };
 
-class Watch {
-    bool is24HourFormat;
 
-public:
-    Watch();
-    void Set24HourFormat(bool is24Hour);
-    void ShowTime(const Time& t) const;
-    void SetTime(Time& t, int h, int m, int s);
-};

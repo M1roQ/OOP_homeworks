@@ -1,5 +1,40 @@
 #include "mytime7_1.h"
 
+
+int Watch::GetHours(const Time& t) const noexcept { return t.hours; }
+int Watch::GetMinutes(const Time& t) const noexcept { return t.minutes; }
+int Watch::GetSeconds(const Time& t) const noexcept { return t.seconds; }
+
+Watch::Watch() : is24HourFormat(true) {}
+
+void Watch::Set24HourFormat(bool is24Hour) {
+    is24HourFormat = is24Hour;
+}
+
+void Watch::ShowTime(const Time& t) const {
+    int hours = t.GetHours();
+    std::string period = "";
+
+    if (!is24HourFormat) {
+        period = (hours >= 12) ? " PM" : " AM";
+        hours = (hours % 12 == 0) ? 12 : hours % 12;
+    }
+
+    std::cout << "Watch shows time: " 
+              << hours << ":" 
+              << t.GetMinutes() << ":" 
+              << t.GetSeconds() 
+              << period << std::endl;
+}
+
+void Watch::SetTime(Time& t, int h, int m, int s) {
+    t.hours = h;
+    t.minutes = m;
+    t.seconds = s;
+    t.Normalize();
+}
+
+
 int Time::objectCount = 0;
 
 void Time::Normalize() {
@@ -124,31 +159,3 @@ void SimpleWatch::SetTime(Time& t, int h, int m, int s) {
     t.Normalize();
 }
 
-Watch::Watch() : is24HourFormat(true) {}
-
-void Watch::Set24HourFormat(bool is24Hour) {
-    is24HourFormat = is24Hour;
-}
-
-void Watch::ShowTime(const Time& t) const {
-    int hours = t.GetHours();
-    std::string period = "";
-
-    if (!is24HourFormat) {
-        period = (hours >= 12) ? " PM" : " AM";
-        hours = (hours % 12 == 0) ? 12 : hours % 12;
-    }
-
-    std::cout << "Watch shows time: " 
-              << hours << ":" 
-              << t.GetMinutes() << ":" 
-              << t.GetSeconds() 
-              << period << std::endl;
-}
-
-void Watch::SetTime(Time& t, int h, int m, int s) {
-    t.hours = h;
-    t.minutes = m;
-    t.seconds = s;
-    t.Normalize();
-}
