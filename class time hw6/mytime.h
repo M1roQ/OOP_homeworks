@@ -1,8 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <stdexcept>  // Для std::invalid_argument
-#include <memory>      // Для умных указателей
 
 class Time {
     int hours;
@@ -14,21 +12,21 @@ class Time {
     void Normalize();
 
 public:
-    Time();  // Конструктор по умолчанию
-    Time(int h, int m, int s);  // Параметризированный конструктор
-    Time(const Time& t);  // Конструктор копирования
+    Time();
+    Time(int h, int m, int s);
+    Time(const Time& t);
 
-    int GetHours() const noexcept;
-    int GetMinutes() const noexcept;
-    int GetSeconds() const noexcept;
+    int GetHours() const;
+    int GetMinutes() const;
+    int GetSeconds() const;
 
-    void PrintTime() const noexcept;
+    void PrintTime() const;
 
-    int ToSeconds() const noexcept;
+    int ToSeconds() const;
 
-    Time& operator=(const Time& other) noexcept;
-    Time& operator+=(int s) noexcept;
-    Time& operator-=(int s) noexcept;
+    Time& operator=(const Time& other);
+    Time& operator+=(int s);
+    Time& operator-=(int s);
 
     friend Time operator+(const Time& t, int s);
     friend Time operator-(const Time& t, int s);
@@ -40,5 +38,5 @@ public:
 
     static int GetObjectCount();
 
-    ~Time();  // Деструктор
+    ~Time();
 };

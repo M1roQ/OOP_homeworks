@@ -1,6 +1,4 @@
 #include "mytime.h"
-#include <stdexcept> 
-#include <iostream>  
 
 int Time::objectCount = 0;
 
@@ -8,7 +6,8 @@ void Time::Normalize() {
     if (seconds >= 60) {
         minutes += seconds / 60;
         seconds %= 60;
-    } else if (seconds < 0) {
+    }
+    else if (seconds < 0) {
         minutes += (seconds / 60) - 1;
         seconds = 60 + (seconds % 60);
     }
@@ -16,54 +15,50 @@ void Time::Normalize() {
     if (minutes >= 60) {
         hours += minutes / 60;
         minutes %= 60;
-    } else if (minutes < 0) {
+    }
+    else if (minutes < 0) {
         hours += (minutes / 60) - 1;
         minutes = 60 + (minutes % 60);
     }
 
     if (hours >= 24) {
         hours %= 24;
-    } else if (hours < 0) {
+    }
+    else if (hours < 0) {
         hours = 24 + (hours % 24);
     }
 }
+
 
 Time::Time() : hours(0), minutes(0), seconds(0) {
     objectCount++;
     std::cout << "Default constructor called. Current object count: " << objectCount << std::endl;
 }
 
-Time::Time(int h, int m, int s) {
-    if (h < 0 || m < 0 || s < 0) {
-        throw std::invalid_argument("Time values cannot be negative");
-    }
-    hours = h;
-    minutes = m;
-    seconds = s;
+Time::Time(int h, int m, int s) : hours(h), minutes(m), seconds(s) {
     Normalize();
     objectCount++;
     std::cout << "Parameterized constructor called. Current object count: " << objectCount << std::endl;
 }
 
-Time::Time(const Time& t) : hours(t.hours), minutes(t.minutes), seconds(t.seconds) {
-    objectCount++;
+Time::Time(const Time& t) : Time(t.hours, t.minutes, t.seconds) {
     std::cout << "Copy constructor called. Current object count: " << objectCount << std::endl;
 }
 
-int Time::GetHours() const noexcept { return hours; }
-int Time::GetMinutes() const noexcept { return minutes; }
-int Time::GetSeconds() const noexcept { return seconds; }
+int Time::GetHours() const { return hours; }
+int Time::GetMinutes() const { return minutes; }
+int Time::GetSeconds() const { return seconds; }
 
-void Time::PrintTime() const noexcept {
+void Time::PrintTime() const {
     std::cout << "H:" << GetHours() << " M:" << GetMinutes() << " S:" << GetSeconds() << std::endl;
 }
 
-int Time::ToSeconds() const noexcept {
+int Time::ToSeconds() const {
     return ((hours * 3600) + (minutes * 60) + seconds);
 }
 
-Time& Time::operator=(const Time& other) noexcept {
-    if (this != &other) { 
+Time& Time::operator=(const Time& other) {
+    if (this != &other) {
         hours = other.hours;
         minutes = other.minutes;
         seconds = other.seconds;
@@ -71,7 +66,7 @@ Time& Time::operator=(const Time& other) noexcept {
     return *this;
 }
 
-Time& Time::operator+=(int s) noexcept {
+Time& Time::operator+=(int s) {
     seconds += s;  
     int totalSeconds = ToSeconds();
     hours = (totalSeconds / 3600) % 24; 
@@ -81,8 +76,7 @@ Time& Time::operator+=(int s) noexcept {
     return *this;
 }
 
-
-Time& Time::operator-=(int s) noexcept {
+Time& Time::operator-=(int s) {
     int totalSeconds = ToSeconds();
     totalSeconds -= s;
     hours = totalSeconds / 3600;

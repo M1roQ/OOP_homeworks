@@ -15,6 +15,9 @@ target_include_directories(TimeLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(TimeProject main.cpp)
 target_link_libraries(TimeProject PRIVATE TimeLib)
 
+add_executable(TimeProject6_1 main6_1.cpp)
+target_link_libraries(TimeProject6_1 PRIVATE TimeLib)
+
 # Опция для включения тестов
 option(ENABLE_TESTS "Enable building tests" ON)
 

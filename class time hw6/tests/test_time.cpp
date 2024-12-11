@@ -2,7 +2,6 @@
 #include "../mytime.h"
 #include <sstream>
 #include <vector>
-#include <list>
 #include <memory>
 
 TEST(TimeConstructorTest, DefaultConstructor) {
@@ -34,13 +33,8 @@ TEST(TimeOperatorTest, EqualityOperator) {
 }
 
 TEST(TimeAccessorsTest, ToSeconds) {
-    Time t2(1, 1, 5);
-    EXPECT_EQ(t2.ToSeconds(), 3665);
-}
-
-TEST(TimeAccessorsTest, ToSeconds_Correct) {
     Time t(2, 30, 15);
-    EXPECT_EQ(t.ToSeconds(), 9015); // 2 * 3600 + 30 * 60 + 15
+    EXPECT_EQ(t.ToSeconds(), 9015);
 }
 
 TEST(TimeAssignmentTest, MinusEqualOperator_Correct) {
@@ -114,16 +108,9 @@ TEST(TimeSmartPointerTest, SharedPointer) {
 }
 
 
-
-TEST(TimeNegativeTest, Constructor_NegativeValues) {
-    EXPECT_THROW(Time(-1, 30, 45), std::invalid_argument); 
-    EXPECT_THROW(Time(1, -30, 45), std::invalid_argument); 
-    EXPECT_THROW(Time(1, 30, -45), std::invalid_argument); 
-}
-
 TEST(TimeNegativeTest, MinusEqualOperator_LargeSubtraction) {
     Time t(0, 0, 30);
-    EXPECT_NO_THROW(t -= 90); 
+    t -= 90; 
     EXPECT_EQ(t.GetHours(), 23); 
     EXPECT_EQ(t.GetMinutes(), 59);
     EXPECT_EQ(t.GetSeconds(), 0);
