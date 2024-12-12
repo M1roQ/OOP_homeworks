@@ -19,7 +19,7 @@ public:
 };
 
 // Derived class: amphibious (can swim and walk)
-class Amphibious : public OceanCreature {
+class Amphibious : virtual public OceanCreature {
 public:
     void walk() const {
         cout << "I can walk." << endl;
@@ -27,8 +27,10 @@ public:
 };
 
 // Derived class: terrestrial creature (can walk but cannot swim)
-class TerrestrialCreature : public Amphibious {
+class TerrestrialCreature : protected Amphibious {
 public:
+    using GenericCreature::exist;
+    using Amphibious::walk;
 };
 
 // Derived class: bird (can walk and fly)
@@ -40,8 +42,9 @@ public:
 };
 
 // Derived class: waterfowl (can walk, fly, and swim)
-class Waterfowl : public Bird, private OceanCreature {
+class Waterfowl : public Bird, virtual public OceanCreature {
 public:
+
 
 };
 
