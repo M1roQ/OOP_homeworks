@@ -1,3 +1,0 @@
-/home/b_val4/Study/OOP/HW/class creature hw9/9_2/build/CMakeFiles/evolApp.dir
-/home/b_val4/Study/OOP/HW/class creature hw9/9_2/build/CMakeFiles/edit_cache.dir
-/home/b_val4/Study/OOP/HW/class creature hw9/9_2/build/CMakeFiles/rebuild_cache.dir
