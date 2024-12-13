@@ -1,3 +1,0 @@
-/home/b_val4/Study/OOP/HW/fabric hw11/11_1/build/CMakeFiles/fab11_1.dir
-/home/b_val4/Study/OOP/HW/fabric hw11/11_1/build/CMakeFiles/edit_cache.dir
-/home/b_val4/Study/OOP/HW/fabric hw11/11_1/build/CMakeFiles/rebuild_cache.dir
